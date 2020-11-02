@@ -11,10 +11,11 @@ use Money\Formatter\IntlMoneyFormatter;
 trait HasPrice
 {
     public function getPriceAttribute($value){
-        return new Money($value);
+        // dd($value);
+        return new Money($value);//600 how the prameter come????????????????????
     }
     public function getFormattedPriceAttribute(){
-
-       return $this->price->formatted();
+        // dd($this->price);
+       return $this->price->formatted();//600+GBP
     }
 }

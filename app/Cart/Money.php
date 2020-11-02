@@ -15,6 +15,9 @@ class Money
     public function __construct($value){
         $this->money=new BaseMoney($value,new Currency('GBP'));
     }
+    //product variation a null price, origianal product price theke call kore.
+    // so return $this->price!==$this->product->price kotha.but hoy na bole tokhon amount function call kore.
+    // bul anount function amon ki return kore je ai problem solve holo
     public function amount(){
         return $this->money->getAmount();
     }

@@ -15,14 +15,18 @@ class ProductVariationResource extends JsonResource
      */
     public function toArray($request)
     {
+        // dd($this->resource);
         if($this->resource instanceof Collection){
             return ProductVariationResource::collection($this->resource);
         }
         return[
-            'id'=>$this->id,
+            'id'=>$this->id, // id foreign key tai error dekhay.tai uporer if
             'name'=>$this->name,
             'price'=>$this->formattedPrice,
-            'price_varies'=>$this->priceVaries()
+            'price_varies'=>$this->priceVaries(),
+            'stock_count'=>(int)$this->stockCount(),
+            'type'=>$this->type->name,
+            'in_stock'=>$this->inStock(),
         ];
     }
 }

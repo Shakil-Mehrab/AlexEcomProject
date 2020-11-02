@@ -11,7 +11,7 @@ class Category extends Model
 {
     use HasChildren,isOrderable;
     public function children(){
-       return $this->hasMany(Category::class,'parent_id','id');
+       return $this->hasMany(Category::class,'parent_id','id');// parent_id foreign id local
     }
     public function products(){
        return $this->belongsToMany(Product::class);

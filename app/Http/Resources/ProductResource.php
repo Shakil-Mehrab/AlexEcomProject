@@ -18,7 +18,7 @@ class ProductResource extends ProductIndexResource
         // dd( $this->variations->groupBy('type.name'));
         return array_merge(parent::toArray($request),[
             'variations'=>ProductVariationResource::collection(
-                $this->variations->groupBy('type.name')
+                $this->variations->groupBy('type.name')//whole beam and ground er under data dekhay
             ),
         ]);
     }
