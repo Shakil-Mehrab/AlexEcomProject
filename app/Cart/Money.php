@@ -12,8 +12,9 @@ use Money\Formatter\IntlMoneyFormatter;
 class Money
 {
     protected $money;
-    public function __construct($value){
-        $this->money=new BaseMoney($value,new Currency('GBP'));
+    public function __construct($value){ //product variation price =$value  ??? Cart subtotal flow koro .$value ase kivabe
+
+        $this->money=new BaseMoney($value,new Currency('BDT'));//USD,GBP
     }
     //product variation a null price, origianal product price theke call kore.
     // so return $this->price!==$this->product->price kotha.but hoy na bole tokhon amount function call kore.
@@ -27,5 +28,13 @@ class Money
             new ISOCurrencies()
         );
         return $formatter->format($this->money);
+    }
+    // for total = sobtotal + Shipping
+    public function add(Money $money){
+        $this->money=$this->money->add($money->instance());
+        return $this;
+    }
+    public function instance(){
+        return $this->money;
     }
 }

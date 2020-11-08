@@ -19,8 +19,8 @@ class CartProductVariationResource extends ProductVariationResource
     {
         return array_merge(parent::toArray($request),[
             'product'=>new ProductIndexResource($this->product),
-            'quantity'=>$this->pivot->quantity,
-            'total'=>$this->getTotal()->formatted(),
+            'quantity'=>$this->pivot->quantity, //cart a kototi
+            'total'=>$this->getTotal()->formatted(), //every variation er 2ti quantity thakle 2*price kore total.eta grand total noy
         ]);
 
     }

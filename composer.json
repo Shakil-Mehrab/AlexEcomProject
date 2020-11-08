@@ -11,6 +11,7 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "moneyphp/money": "^3.3",
+        "stripe/stripe-php": "^7.61",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

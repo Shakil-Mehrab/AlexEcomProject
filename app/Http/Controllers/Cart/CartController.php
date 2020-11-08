@@ -24,18 +24,17 @@ class CartController extends Controller
             'cart.type'
             ]);
         // dd($cart);
-       return (new CartResource($request->user()))
+       return (new CartResource($request->user())) ///only auth user er jonno single time call tai new
        ->additional([
-        'meta'=>$this->meta($cart)
+        'meta'=>$this->meta($cart,$request)
        ]);
     }
-    protected function meta(Cart $cart){
+    protected function meta(Cart $cart,Request $request){
         return[
             'empty'=>$cart->isEmpty(),
             'subtotal'=>$cart->subtotal()->formatted(),
-            'total'=>$cart->total()->formatted(),
-            'changed'=>$cart->hasChanged(),
-
+            'total'=>$cart->withShipping($request->shipping_method_id)->total()->formatted(),
+            'changed'=>$cart->hasChanged(),// min stock er cheye cart_user er product besi hole true te update hoy sync kore
         ];
     }
     public function store(CartStoreRequest $request,Cart $cart){

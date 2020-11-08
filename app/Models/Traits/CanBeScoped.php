@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Builder;
 trait CanBeScoped
 {
     public function scopeWithScopes(Builder $builder,$scopes=[]){
-        // dd($builder);
-        // dd($scopes);
-        // dd(request());
+        // $scopes = array:1 [
+        //     "category" => App\Scoping\Scopes\CategoryScope
+        //   ]
         return (new Scoper(request()))->apply($builder,$scopes);
     }
 }

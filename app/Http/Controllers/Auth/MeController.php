@@ -13,6 +13,6 @@ class MeController extends Controller
         $this->middleware(['auth:api']);
     }
     public function action(Request $request){
-        return new PrivateUserResource($request->user());
+        return new PrivateUserResource($request->user()); //eta collection noy tai single er jono new use
     }
 }

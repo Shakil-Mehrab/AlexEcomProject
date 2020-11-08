@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Support\Collection;
+use App\Http\Resources\ProductIndexResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductVariationResource extends JsonResource
@@ -22,11 +23,12 @@ class ProductVariationResource extends JsonResource
         return[
             'id'=>$this->id, // id foreign key tai error dekhay.tai uporer if
             'name'=>$this->name,
-            'price'=>$this->formattedPrice,
+            'price'=>$this->formattedPrice,  //hasprice er vitor **return new Money($value)** @@bt protteker alada@@
             'price_varies'=>$this->priceVaries(),
-            'stock_count'=>(int)$this->stockCount(),
+            'stock_count'=>(int)$this->stockCount(), //stockCount()->stock()->sum(pro_vari belongsTomany pro_vari_stick_view)
             'type'=>$this->type->name,
             'in_stock'=>$this->inStock(),
+            'product'=>new ProductIndexResource($this->product),
         ];
     }
 }

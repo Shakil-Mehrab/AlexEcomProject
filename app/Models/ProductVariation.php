@@ -6,6 +6,7 @@ use App\Cart\Money;
 use App\Models\Traits\HasPrice;
 use App\Models\ProductVariationType;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Collections\ProductVariationCollection;
 
 class ProductVariation extends Model
 {
@@ -27,10 +28,10 @@ class ProductVariation extends Model
     }
     public function stockCount(){
         // dump($this->stock->sum('pivot.stock'));
-        return $this->stock->sum('pivot.stock'); //why sum
+        return $this->stock->sum('pivot.stock');//cart_user er protteker jonno pro_vari*Pro_vari_stock_view bar call hove
     }
     public function type(){
-        return $this->hasOne(ProductVariationType::class,'id','product_variation_type_id');//id foreign key kivabe
+        return $this->hasOne(ProductVariationType::class,'id','product_variation_type_id');//id ProductVariationType er.ja pro_vari er jonno foreign key
     }
     public function product(){
         return $this->belongsTo(Product::class);
@@ -39,11 +40,16 @@ class ProductVariation extends Model
         return $this->hasMany(Stock::class);
     }
     public function stock(){
+    //jodi product_variation_stock thakto tahole return $this->belongsToMany(Stock::class) dilei hoto
         return $this->belongsToMany(
-            ProductVariation::class,'product_variation_stock_view'  ///product variation asbe
-            )->withPivot([  ///product variation table er part noy tai pivot niye neya
+            ProductVariation::class,'product_variation_stock_view'  ///product variation asbe.mirror tai stock r ekti table ja connected
+            )->withPivot([  //product_variation_stock_view theke stock and in_stock
                 'stock',
                 'in_stock'
-                ]);
+            ]);
+    }
+    public function newCollection(array $models = [])
+    {
+        return new ProductVariationCollection($models);
     }
 }

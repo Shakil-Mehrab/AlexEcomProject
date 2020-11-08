@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Builder;
 
 interface Scope
 {
-    public function apply(Builder $builder,$value); //ki drkr chilo ?????????????????????
+    public function apply(Builder $builder,$value);
 }

@@ -2,29 +2,19 @@
 
 namespace App\Models;
 
+use App\Models\Traits\CanBeDefault;
 use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
+    use CanBeDefault;
     // protected $filable=[
     //     'name',
     //     'address_1',
     //     'city',
     //     'postal_code'
     // ];
-    public static function boot(){
-        parent::boot();
-        static::creating(function($address){
-            if($address->default){
-                $address->user->addresses()->update([
-                    'default'=>false
-                ]);
-            }
-        });
-    }
-    public function setDefaultAttribute($value){
-        $this->attributes['default'] = ($value===true || $value ? true : false);
-    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }

@@ -17,11 +17,14 @@ class Product extends Model
         return 'slug';
     }
 
-    public function scopeShakil($query, $page=5)
+    public function scopeShakil($query, $page=5) //$products array variable.Ehkane builder jorito thake.So kono function likhle scope thakbe
     {
         return $query->paginate($page);
     }
-
+    // public function scopeShakil(Builder $builder, $page=5) //etao hoy
+    // {
+    //     return $builder->paginate($page);
+    // }
     public function categories(){
         return $this->belongsToMany(Category::class);//class import kora lGE NI
     }
